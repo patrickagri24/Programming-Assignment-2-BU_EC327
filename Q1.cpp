@@ -77,25 +77,48 @@ int main()
 				cout << "Please enter command parameter: ";
 				cin >> FactFib;
 
+
+				//Loop to check if legal input
+				while(FactFib < 0 || FactFib > 10000)
+				  {
+				    cout << "Invalid entry, try again: ";
+				    cin >> FactFib;
+				  }
+
 				out1 = factorial(FactFib);
 
 				//Stub 
 				//Do we need?
-				cout << "Factorial(" << FactFib << ")" << " = " << out1 << endl << endl;
+				cout << "Factorial(" << FactFib << ")" << " = " << out1 << endl;
 			}
 
 			//If Mastercode called for fibonacci
 			else if(MasterCode == 'B' || MasterCode == 'b')
 			{
 
-			cout << "Please enter command parameter: ";
-			cin >> FactFib;
+			  cout << "Please enter command parameter: ";
+			  cin >> FactFib;
 
-			out1 = fibonacci(FactFib);
+			  if(FactFib == 1)
+			    {
+			      cout << "Fibonacci(" << FactFib << ")" << " = " << 1 << endl;
+			      break;
+			    }
+			  else
+			    {
+			      //Loop to check if legal input
+			      while(FactFib <= 0 || FactFib > 10000)
+				{
+				  cout << "Invalid entry, try again: ";
+				  cin >> FactFib;
+				}
 
-			//Stub
-			//Do we need?
-			cout << "Fibonacci(" << FactFib << ")" << " = " << out1 << endl << endl;
+			      out1 = fibonacci(FactFib);
+
+			    }
+			  //Stub
+			  //Do we need?
+			  cout << "Fibonacci(" << FactFib << ")" << " = " << out1 << endl;
 			}
 
 
@@ -147,11 +170,8 @@ int main()
 
 
 				//Collects first and last values, for data collection purposes
-				cout << "Please input the first number in the sequence: ";
-				cin >> firstOdd;
-
-				cout << "Please input the last number in the sequence: ";
-				cin >> lastOdd;
+			        cout << "Please enter code parameters: ";
+				cin >> firstOdd >> lastOdd;
 
 
 
@@ -172,17 +192,35 @@ int main()
 				int i = firstOdd;
 
 
-				for(i; i < lastOdd;)
-				{
 
-					out1 = findNextOddValue(i);
+				  if(firstOdd % 2 == 0)
+				  {
+				    for(i; i < lastOdd;)
+					{
+					  out1 = findNextOddValue(i);
 
-					i = i +2;
+					  cout << out1 << ", ";
 
-					cout << out1 << " ";
-				}
+					  i = i + 2;
+					}
+				  }
+				  else
+				  {
 
-					cout << endl << endl;
+				      cout << firstOdd << ", ";
+				      for(i; i < lastOdd-1;)
+					{
+					  out1 = findNextOddValue(i);
+					
+					  cout << out1 << ", ";
+
+					  i = i + 2;
+					}
+				  }
+
+				
+
+				cout << endl;
 	
 
 
@@ -202,7 +240,7 @@ int main()
 					{
 
 						//Collects first, last, and delta values
-						cout << "Please enter first, last, and delta values, respectively: ";
+						cout << "Please enter command parameters: ";
 						cin >> firstSLN >> lastSLN >> deltaSLN;
 	
 
@@ -227,18 +265,32 @@ int main()
 								//makes it so for loop will not iterate more than ENTRIES
 								if(c <= ENTRIES)
 								{
-									out2 = findSqrtValue(firstSLN + (deltaSLN * k));
 									
-									cout<< "squareroot(" << i << ")" << " = " << out2 << endl;
-
-									i = i + m;
 									
-									if(i > j)
+									
+									if(i == j)
 									{
-										cout<< "squareroot(" << j << ")" << " = " << out2 << endl;
+									  out2 = findSqrtValue(i);
+									  cout << "squareroot(" << i << ")" << " = " << out2 << endl;
+									  break;
 									}
+									else
+									{
+									  out2 = findSqrtValue(firstSLN + (deltaSLN * k));
 									
-									k++;
+									  cout<< "squareroot(" << i << ")" << " = " << out2 << endl;
+
+									  i = i + m;
+									
+									   if(i > j)
+									   {
+									     out2 = findSqrtValue(j);
+									     cout<< "squareroot(" << j << ")" << " = " << out2 << endl;
+									   }
+
+
+								      	  k++;
+									}
 								}
 
 								else
@@ -252,7 +304,7 @@ int main()
 	
 	
 	
-						cout << endl;
+						
 					}
 
 			
@@ -263,7 +315,7 @@ int main()
 					{
 
 						//Collects first, last, and delta values
-						cout << "Please enter first, last, and delta values, respectively: ";
+						cout << "Please enter command parameters: ";
 						cin >> firstSLN >> lastSLN >> deltaSLN;
 
 
@@ -288,20 +340,33 @@ int main()
 								//Makes it so loop will not iterate more than ENTIRES
 								if(c <= ENTRIES)
 								{
-	
-									out2 = naturalLog(firstSLN + (deltaSLN * k));
-																
-									cout<< "ln(" << i << ")" << " = " << out2 << endl;
-	
-									i = i + m;
-									
-									if(i > j)
+	 																
+								
+									if(i == j)
 									{
-										cout<< "ln(" << j << ")" << " = " << out2 << endl;
+									  out2 = naturalLog(i);
+									  cout << "ln(" << i << ")" << " = " << out2 << endl;
+									  break;
+									}
+									else
+									{
+									  out2 = naturalLog(firstSLN + (deltaSLN * k));
+																
+									  cout<< "ln(" << i << ")" << " = " << out2 << endl;
+	
+									  i = i + m;
+
+									  if(i > j)
+									  {
+									     out2 = naturalLog(j);
+									     cout<< "ln(" << j << ")" << " = " << out2 << endl;
+									  }
+
+
+									  k++;
 									}
 									
 								
-									k++;
 
 								}
 	
@@ -314,7 +379,7 @@ int main()
 						else
 							cout << "No operation needed" << endl;
 	
-							cout << endl;
+							
 	
 	
 	
@@ -328,7 +393,7 @@ int main()
 					{
 
 						//Collects first, last, and delta values
-						cout << "Please enter first, last, and delta values, respectively: ";
+						cout << "Please enter command parameters: ";
 						cin >> firstSLN >> lastSLN >> deltaSLN;
 
 
@@ -353,20 +418,31 @@ int main()
 								//Sets up for loop to never run more than ENTRIES
 								if(c <= ENTRIES)
 								{
-
-									out2 = findNyanCatValue(firstSLN + (deltaSLN * k));
 									
-									cout<< "Nyan Cat value of(" << i << ")" << " = " << out2 << endl;
-
-									i = i + m;
 									
-									if(i > j)
+									if( i == j)
 									{
-										cout<< "Nyan Cat value of(" << j << ")" << " = " << out2 << endl;
+									  out2 = findNyanCatValue(i);
+									  cout << "Nyan Cat value of (" << i << ")" << " = " << out2 << endl;
+									  break;
 									}
+									else
+									{
+									  out2 = findNyanCatValue(firstSLN + (deltaSLN * k));
 									
+									  cout<< "Nyan Cat value of(" << i << ")" << " = " << out2 << endl;
+
+								          i = i + m;
 									
-									k++;
+									  if(i > j)
+									    {
+									      out2 = findNyanCatValue(j);
+									      cout<< "Nyan Cat value of(" << j << ")" << " = " << out2 << endl;
+									    }
+
+									  
+								          k++;
+									}
 								}
 
 								else
@@ -379,7 +455,7 @@ int main()
 						else
 							cout << "No operation needed" << endl;
 			
-							cout << endl;
+							
 					}
 
 

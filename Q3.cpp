@@ -27,11 +27,11 @@ void PrintUpper(int x)
 
   if(x > 1)
     {
-
+      //Recursion all the way down
       PrintUpper(x - 1);
 
     }
-
+  //Outputs string spaces
    cout << string(nmoves,' ');
 
    Row(1, x);
@@ -46,18 +46,18 @@ void PrintUpper(int x)
 //Prints lower rhombus
 void PrintLower(int y)
 {
-
+  //Delocates spaces
   int nmoves = 27 - (3 * y);
 
   if(y >= 1)
 {
-
+  //Spaces
   cout << string(nmoves, ' ');
 
   Row(1, y);
 
   cout << endl;
-
+  //Recursion
   PrintLower(y - 1);
 }
 

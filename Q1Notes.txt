@@ -1,3 +1,0 @@
-read to file 
-
-stream to file >> var1 >> var2>> var3

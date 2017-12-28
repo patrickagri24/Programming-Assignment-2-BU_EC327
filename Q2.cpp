@@ -1,8 +1,10 @@
 #include <iostream>
-#include <ctime>
+#include <stdlib.h>
+#include <time.h>
 #include "FileFunctions.h"
 #include "Statistics.h"
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -60,35 +62,41 @@ int main()
 	srand(time(NULL));
 	
 	//Define variables for text file manipulation
-	char input[1000];
-	char * filename;
+	//	char input[1000];
+	char * filename = "data.txt";
 	
 	//Define numbers for function
-	int M = (rand() % 25) + 0;
+	int M = (rand() % 1000) + 0;
 	int N = (rand() % M) + 0;
 	
-	cout << M << endl;
-	cout << N << endl;
+	//Outputs M and N for testing
+	//	cout << M << endl;
+	//	cout << N << endl;
 	
 	//Defines more variables
 	int size = 0;
 	
 	//Dynamic mem allocate
-	int * myArray = new int[size];
-	
+	int * myArray = new int[N];
+	//	int * myArray;
 	
 	//Asks user for filename
+	/*
 	cout << "Enter a filename: ";
 	cin >> input;
 	
 	cout << endl;
-	
+	*/
+
+
 	//points pointer to new filename
-	filename = input;
+	//	filename = input;
 	
 	
 	cout << "Writing file: " << filename << endl;
 	cout << "Reading file: " << filename << endl;
+
+	cout << "Array size is: " << N << endl;
 	
 	
 	//performs write random data
@@ -135,7 +143,7 @@ int main()
 	
 	cout << endl << endl;
 	
-	
+	delete  ptr_Array;
 	
 	
 	

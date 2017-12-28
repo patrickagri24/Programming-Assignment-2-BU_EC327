@@ -18,6 +18,7 @@ void initialize()
 
   cout << "Value of entries is: "<< ENTRIES << endl; //Come back to here once defined value in int main
 
+  return;
 }
 
 //Logical function for declaring legal code
@@ -38,68 +39,66 @@ void writeDataToFile(const char* x)
 {
 
 
-  //Defines master code
-  char MasterCode;
+	//Defines master code
+	char MasterCode;
 
-  //Defines single integer parameters to be used in Factorial or Fibonacci
-  int FactFib;
-
-
-  //Defines parameters for Computing odd numbers
-  int firstOdd;
-  int lastOdd;
+	//Defines single integer parameters to be used in Factorial or Fibonacci
+	int FactFib;
 
 
-  //Defines parameters for Square Root, etc functions
-  double firstSLN;
-  double lastSLN;
-  double deltaSLN;
+	//Defines parameters for Computing odd numbers
+	int firstOdd;
+	int lastOdd;
 
 
-  //Defines outputs for use when needed
-  int out1;
-  double out2;
+	//Defines parameters for Square Root, etc functions
+	double firstSLN;
+	double lastSLN;
+	double deltaSLN;
+
+
+	//Defines outputs for use when needed
+	int out1;
+	double out2;
 
 
 	ofstream file;
 	
 	file.open(x);
 	
-	
-  file << "EC327: Introduction to Software Engineering" << "\r\n";
+	/*
+	file << "EC327: Introduction to Software Engineering" << "\r\n";
 
-  file << "Fall 2017" << "\r\n";
+	file << "Fall 2017" << "\r\n";
 
-  file << "Programming Assignment 2" << "\r\n";
+	file << "Programming Assignment 2" << "\r\n";
 
-  file << "Value of entries is: "<< ENTRIES << "\r\n"; //Come back to here once defined value in int main
+	file << "Value of entries is: "<< ENTRIES << "\r\n"; //Come back to here once defined value in int main
+	*/
 
 
-
-  cout << "Please enter a command code: ";
-  file << "Please enter a command code: ";
+	cout << "Please enter a command code: ";
+	file << "Please enter a command code: ";
   
-  cin >> MasterCode;
-  file << MasterCode << "\r\n";
+	cin >> MasterCode;
+	file << MasterCode << "\r\n";
 
-  //Checks if command code was illegal
-  //Calls code Key1 for being the first key to continue program
-  bool Key1 = checkCode(MasterCode);
+	//Checks if command code was illegal
+	//Calls code Key1 for being the first key to continue program
+	bool Key1 = checkCode(MasterCode);
 
   //While loop for checking the code
-  while(Key1 == 0)
-    {
-      cout << "You have entered an incorrect code, try again: ";
-      cin >> MasterCode;
+	while(Key1 == 0)
+	  {
+		cout << "You have entered an incorrect code, try again: ";
+		cin >> MasterCode;
 
-      Key1 = checkCode(MasterCode);
-    }
+		Key1 = checkCode(MasterCode);
+	  }
 
 	
 	
-  //Sets up Program if mastercode was either factorial or fibonacci
-  while(MasterCode == 'F' || MasterCode == 'f' || MasterCode == 'B' || MasterCode == 'b' || MasterCode == 'R' || MasterCode == 'r' || MasterCode == 'D' ||
-	MasterCode == 'd' || MasterCode == 'L' || MasterCode == 'l' || MasterCode == 'N' || MasterCode == 'n')
+	do
     {
 
 	
@@ -117,8 +116,8 @@ void writeDataToFile(const char* x)
 
 			//Stub 
 			//Do we need?
-			cout << out1 << endl << endl;
-			file << out1 << "\r\n";
+			cout << "Factorial(" << FactFib << ")" << " = " << out1 << endl;
+			file << "Factorial(" << FactFib << ")" << " = " << out1 << "\r\n";
 		}
 
       //If Mastercode called for fibonacci
@@ -131,13 +130,22 @@ void writeDataToFile(const char* x)
 			cin >> FactFib;
 			file << FactFib << "\r\n";
 
-			out1 = fibonacci(FactFib);
+			if(FactFib == 1)
+			  {
+			    cout << "Fibonacci(" << FactFib << ")" << " = " << 1 << endl;
+			    file << "Fibonacci(" << FactFib << ")" << " = " << 1 << "\r\n";
+			    
+			  }
+			else
+			  {
 
-			//Stub
-			//Do we need?
-			cout << out1 << endl << endl;
-			file << out1 << "\r\n";
-	  
+			    out1 = fibonacci(FactFib);
+
+			    //Stub
+			    //Do we need?
+			    cout << "Fibonacci(" << FactFib << ")" << " = " << out1 << endl;
+			    file << "Fibonacci(" << FactFib << ")" << " = " << out1 << "\r\n";
+			  }
 	  
 		}
 
@@ -151,29 +159,21 @@ void writeDataToFile(const char* x)
 
 
 			//Collects first and last values, for data collection purposes
-			cout << "Please input the first number in the sequence: ";
-			file << "Please input the first number in the sequence: ";
-	  
-			cin >> firstOdd;
-			file << firstOdd << "\r\n";
+		        cout << "Please input code parameters: ";
+			file << "Please input code parameters: ";
 
-			cout << "Please input the last number in the sequence: ";
-			file << "Please input the last number in the sequence: ";
-	  
-			cin >> lastOdd;
-			file << lastOdd << "\r\n";
-
-
-
+			cin >> firstOdd >> lastOdd;
+			file << firstOdd << " " << lastOdd << "\r\n";
+		       
 
 			//Error check
 			while(firstOdd >= lastOdd)
 			{
-			cout << "Invalid numbers, please input first number in sequence: ";
-			cin >> firstOdd;
+			   cout << "Please input code parameters: ";
+			   file << "Please input code parameters: ";
 
-			cout << "Please input last number of sequence: ";
-			cin >> lastOdd;
+			   cin >> firstOdd >> lastOdd;
+			   file << firstOdd << " " << lastOdd << "\r\n";
 
 			}
 
@@ -181,20 +181,40 @@ void writeDataToFile(const char* x)
 			//Reassigns i to be first odd number
 			int i = firstOdd;
 
+		
+	        
+			  if(firstOdd % 2 == 0)
+			    {
+			      for(i; i < lastOdd;)
+				{
+				  out1 = findNextOddValue(i);
 
-			for(i; i < lastOdd;)
-			{
+				  i = i + 2;
 
-			out1 = findNextOddValue(i);
+				  cout << out1 << ", ";
+				  file << out1 << ", ";
+				}
+			    }
+			  else
+			    {
+			      cout << firstOdd << ", ";
+			      for(i; i < lastOdd-1;)
+				{
+				  file << firstOdd << ", ";
 
-			i = i +2;
+				  out1 = findNextOddValue(i);
 
-			cout << out1 << ' ';
-			file << out1 << ' ';
+				  i = i + 2;
+
+				  cout << out1 << ", ";
+				  file << out1 << ", ";
+				}
+
+			    }
 	
-			}
+			
 
-			cout << endl << endl;
+			cout << endl;
 			file << "\r\n";
 
 		}
@@ -213,11 +233,11 @@ void writeDataToFile(const char* x)
 			{
 
 				//Collects first, last, and delta values
-				cout << "Please enter first, last, and delta values, respectively: ";
-				file << "Please enter first, last, and delta values, respectively: ";
+				cout << "Please enter command parameters: ";
+				file << "Please enter command parameters: ";
 				
 				cin >> firstSLN >> lastSLN >> deltaSLN;
-				file << firstSLN << lastSLN << deltaSLN << "\r\n";
+				file << firstSLN << " "<< lastSLN << " " << deltaSLN << "\r\n";
 			
 
 				//performs operation
@@ -225,10 +245,11 @@ void writeDataToFile(const char* x)
 				{
 				//For loop to do operation
 	      
-				int i = firstSLN;	      
-				int j = lastSLN;
+				double i = firstSLN;	      
+				double j = lastSLN;
+				double m = deltaSLN;
+							
 				double k = 0;
-
 				//Designates a counter
 				int c = 1;
 
@@ -238,14 +259,41 @@ void writeDataToFile(const char* x)
 					//makes it so for loop will not iterate more than ENTRIES
 					if(c <= ENTRIES)
 					{
-					out2 = findSqrtValue(firstSLN + (deltaSLN * k));
-					cout<< "Square root is: " << out2 << endl;
+						
+						
+						
+						if(i == j)
+						{
+						  out2 = findSqrtValue(j);
+						       
+						  cout<< "squareroot(" << j << ")" << " = " << out2 << endl;
+						  file<< "squareroot(" << j << ")" << " = " << out2 << "\r\n";
+
+						  break;
+						}
+						else
+						{
+						  out2 = findSqrtValue(firstSLN + (deltaSLN * k));
 					
-					file<< "Square root is: " << out2 << "\r\n";
+						  cout<< "squareroot(" << i << ")" << " = " << out2 << endl;
+						  
+						  file<< "squareroot(" << i << ")" << " = " << out2 << "\r\n";
 					
 
-					i++;
-					k++;
+						  i = i + m;
+						  
+						  if(i > j)
+						    {
+						        out2 = findSqrtValue(j);
+						       
+						        cout<< "squareroot(" << j << ")" << " = " << out2 << endl;
+							file<< "squareroot(" << j << ")" << " = " << out2 << "\r\n";
+						    }
+
+
+				
+						  k++;
+						}
 					}
 
 					else
@@ -260,8 +308,10 @@ void writeDataToFile(const char* x)
 			
 
 				else
-					cout << "No operation needed" << endl << endl;
-
+				  {
+				    cout << "No operation needed" << endl;
+					file << "No operation needed" << endl << "\r\n";
+				  }
 
 			}
 
@@ -271,11 +321,11 @@ void writeDataToFile(const char* x)
 			{
 
 				//Collects first, last, and delta values
-				cout << "Please enter first, last, and delta values, respectively: ";
-				file << "Please enter first, last, and delta values, respectively: ";
+				cout << "Please enter command parameters: ";
+				file << "Please enter command parameters: ";
 				
 				cin >> firstSLN >> lastSLN >> deltaSLN;
-				file << firstSLN << lastSLN << deltaSLN << "\r\n";
+				file << firstSLN << " " << lastSLN << " " <<  deltaSLN << "\r\n";
 
 
 
@@ -284,9 +334,11 @@ void writeDataToFile(const char* x)
 				{
 						//For loop to do operation
 	      
-						int i = firstSLN;	      
-						int j = lastSLN;
-						int k = 0;
+						double i = firstSLN;	      
+						double j = lastSLN;
+						double m = deltaSLN;
+							
+						double k = 0;
 
 						//Designates a counter
 						int c = 1;
@@ -298,13 +350,37 @@ void writeDataToFile(const char* x)
 						if(c <= ENTRIES)
 						{
 
-							out2 = naturalLog(firstSLN + (deltaSLN * k));
-							cout<< "Natural log is: " << out2 << endl;
-							
-							file<< "Natural log is: " << out2 << "\r\n";
+													       						       
+							if(i == j)
+							{
+							     out2 = naturalLog(j);
 
-							i++;
-							k++;
+							     cout<< "ln(" << j << ")" << " = " << out2 << endl;
+							     file<< "ln(" << j << ")" << " = " << out2 << "\r\n";
+							     
+							     break;
+
+							}
+							else
+							{
+							  out2 = naturalLog(firstSLN + (deltaSLN * k));
+							
+							  cout<< "ln(" << i << ")" << " = " << out2 << endl;
+							
+							  file<< "ln(" << i << ")" << " = " << out2 << "\r\n";
+							
+							  i = i + m;
+
+							  if(i > j)
+							    {
+							        out2 = naturalLog(j);
+
+							        cout<< "ln(" << j << ")" << " = " << out2 << endl;
+								file<< "ln(" << j << ")" << " = " << out2 << "\r\n";
+							    }
+							
+							  k++;
+							}
 
 						}
 
@@ -315,7 +391,10 @@ void writeDataToFile(const char* x)
 					}
 				}
 				else
-					cout << "No operation needed" << endl << endl;
+				  {
+				    cout << "No operation needed" << endl;
+					file << "No operation needed" << endl << "\r\n";
+				  }
 			}
 
 			//If code is nyancat
@@ -323,11 +402,11 @@ void writeDataToFile(const char* x)
 			{
 
 					//Collects first, last, and delta values
-					cout << "Please enter first, last, and delta values, respectively: ";
-					file << "Please enter first, last, and delta values, respectively: ";
+					cout << "Please enter command parameters: ";
+					file << "Please enter command parameters: ";
 					
 					cin >> firstSLN >> lastSLN >> deltaSLN;
-					file << firstSLN << lastSLN << deltaSLN << "\r\n";
+					file << firstSLN <<  " " <<  lastSLN << " " << deltaSLN << "\r\n";
 
 
 
@@ -336,9 +415,11 @@ void writeDataToFile(const char* x)
 					{
 						//For loop to do operation
 	      
-						int i = firstSLN;	      
-						int j = lastSLN;
-						int k = 0;
+						double i = firstSLN;	      
+						double j = lastSLN;
+						double m = deltaSLN;
+							
+						double k = 0;
 
 						//Designates a counter
 						int c = 1;
@@ -350,16 +431,45 @@ void writeDataToFile(const char* x)
 							if(c <= ENTRIES)
 							{
 
-							out2 = findNyanCatValue(firstSLN + (deltaSLN * k));
-							cout<< "Nyancat value is: " << out2 << endl;
-							file<< "Nyancat value is: " << out2 << "\r\n";
+								
+								
+								
+								if(i == j)
+								{
+								  out2 = findNyanCatValue(j);
 
-							i++;
-							k++;
+								  cout<< "Nyan Cat value of(" << j << ")" << " = " << out2 << endl;
+									
+								  file<< "Nyan Cat value of(" << j << ")" << " = " << out2 << "\r\n";
+
+								  break;
+								}
+								else
+								{
+								  out2 = findNyanCatValue(firstSLN + (deltaSLN * k));
+								
+								  cout<< "Nyan Cat value of(" << i << ")" << " = " << out2 << endl;
+								
+								  file<< "Nyan Cat value of(" << i << ")" << " = " << out2 << "\r\n";
+
+								  i = i + m;								
+								
+								  if(i > j)
+								    {
+								        out2 = findNyanCatValue(j);
+
+								        cout<< "Nyan Cat value of(" << j << ")" << " = " << out2 << endl;
+									
+									file<< "Nyan Cat value of(" << j << ")" << " = " << out2 << "\r\n";
+								
+								    }
+
+								  k++;
+								}
 							}
 
 							else
-							break;
+								break;
 
 
 
@@ -368,7 +478,10 @@ void writeDataToFile(const char* x)
 					
 	  
 					else
-						cout << "No operation needed" << endl << endl;
+					  {
+					    cout << "No operation needed" << endl;
+						file << "No operation needed" << endl << "\r\n";
+					  }
 			}	
 
 
@@ -401,25 +514,25 @@ void writeDataToFile(const char* x)
 						file << "You have entered an incorrect code, try again: ";
 						
 						cin >> MasterCode;
+						file << MasterCode << "\r\n";
 
 						Key1 = checkCode(MasterCode);
 					}
-
+					
+					
+		
 		
 	}
-
-
-  //This is the last parameter, and if the Master Code ever equals this, the program will end
-  if(MasterCode == 'Q' || MasterCode == 'q')
-
-    {
-		
-	  file.close();
 	
-      cout << "Thanks for playing!" << endl << endl;
-    }
+	//Keeps looping, if the input is Q, this function exits and returns to the main function.  This means that you cannot directly exit the program from this 
+	//function
+	while(MasterCode == 'F' || MasterCode == 'f' || MasterCode == 'B' || MasterCode == 'b' || MasterCode == 'R' || MasterCode == 'r' || MasterCode == 'D' ||
+	MasterCode == 'd' || MasterCode == 'L' || MasterCode == 'l' || MasterCode == 'N' || MasterCode == 'n');
 
-	
+
+	file.close();
+
+	cout << "You are now back in the main function and file writing has stopped. To terminate main program, select q again." << endl;
 
 
 }
@@ -461,12 +574,6 @@ void readDataFromFile(const char *x)
 		while(file >> MasterCode)
 		{
 			
-			
-			//Sets up Program if mastercode was either factorial or fibonacci
-			if(MasterCode == 'F' || MasterCode == 'f' || MasterCode == 'B' || MasterCode == 'b' || MasterCode == 'R' || MasterCode == 'r' || MasterCode == 'D' ||
-				MasterCode == 'd' || MasterCode == 'L' || MasterCode == 'l' || MasterCode == 'N' || MasterCode == 'n')
-			{
-
 				cout << "Please enter command code: " << MasterCode << endl;
 
 				//If Mastercode called for factorial
@@ -482,7 +589,7 @@ void readDataFromFile(const char *x)
 
 					//Stub 
 					//Do we need?
-					cout << out1 << endl << endl;
+					cout << "Factorial(" << y << ")" << " = " << out1 << endl;
 					
 				}
 
@@ -495,13 +602,19 @@ void readDataFromFile(const char *x)
 			
 					cout << "Please enter command parameter: " << y << endl;;
 					
-	  
+					if(y == 1)
+					  {
+					    cout << "Fibonacci(" << y << ")" << " = " << 1 << endl;
+					  }
+					else
+					  {
 
-					out1 = fibonacci(y);
-
-					//Stub
-					//Do we need?
-					cout << out1 << endl << endl;
+					    out1 = fibonacci(y);
+					
+					    //Stub
+					    //Do we need?
+					    cout << "Fibonacci(" << y << ")" << " = " << out1 << endl;
+					  }
 					
 	  
 	  
@@ -518,53 +631,59 @@ void readDataFromFile(const char *x)
 					file >> o >> p;
 
 					//Collects first and last values, for data collection purposes
-					cout << "Please input the first number in the sequence: " << o << endl;;
-				
-
-					cout << "Please input the last number in the sequence: " << p << endl;
-				
-
+					cout << "Please enter command parameters: "<< o << " " << p << endl;
+			        
 
 
 							//Reassigns i to be first odd number
 							int i = o;
 
+							
+					        
+							  if(o % 2 == 0)
+							    {
+							      for(i; i < p;)
+								{
+								  out1 = findNextOddValue(i);
 
-							for(i; i < p;)
-							{
+								  i = i + 2;
 
-								out1 = findNextOddValue(i);
+								  cout << out1 << ",";
+								}
+							    }
+							  else
+							    {
+							      cout << o << ",";
+							      for(i; i < p-1;)
+								{
 
-								i = i + 2;
+								  out1 = findNextOddValue(i);
 
-								cout << out1 << ' ';
+								  i = i + 2;
+
+								  cout << out1 << ",";
+								}
+
+							    }
 							
 	
-							}
+							
 
-							cout << endl << endl;
+							 	cout << endl;
 							
 
 				}
 			
-			
-    
 
-
-				//Sets up program for if mastercode is nyancat value, natural log, or square root
-				//MIGHT HAVE TO ALTER DELTA ONCE FIGURE OUT WHAT EXACTLY THIS MEANS
-				else if(MasterCode == 'R' || MasterCode == 'r' || MasterCode == 'L' || MasterCode == 'l' || MasterCode == 'N' || MasterCode == 'n')
+				//If code is square root
+				else if(MasterCode == 'R' || MasterCode == 'r')
 				{
-
-					//If code is square root
-					if(MasterCode == 'R' || MasterCode == 'r')
-					{
 
 						//values we need
 						file >> a >> b >> c;
 				
 						//Collects first, last, and delta values
-						cout << "Please enter first, last, and delta values, respectively: " << a << ' ' << b << ' ' << c;
+						cout << "Please enter code parameters: " << a << ' ' << b << ' ' << c << endl;
 						
 				
 			
@@ -574,26 +693,52 @@ void readDataFromFile(const char *x)
 						{
 							//For loop to do operation
 	      
-							int i = a;	      
-							int j = b;
+							double i = a;	      
+							double j = b;
+							double m = c;
+							
 							double k = 0;
 
+							
+							
+							
 							//Designates a counter
-							int c = 1;
+							int d = 1;
 	
-							for(i; i <=  j;c++)
+							for(i; i <=  j;d++)
 							{
 
 								//makes it so for loop will not iterate more than ENTRIES
-								if(c <= ENTRIES)
+								if(d <= ENTRIES)
 								{
-									out2 = findSqrtValue(a + (c * k));
-									cout<< "Square root is: " << out2 << endl;
-					
-			
+									
 
-									i++;
-									k++;
+									
+									if(i == j)
+									{
+									    out2 = findSqrtValue(j);
+									    cout<< "squareroot(" << j << ")" << " = " << out2 << endl;
+
+									    break;
+									}
+									else
+									{
+
+									  out2 = findSqrtValue(a + (c * k));
+									
+									  cout<< "squareroot(" << i << ")" << " = " << out2 << endl;
+					
+									  i = i + m;
+
+									  if(i > j)
+									    {
+									        out2 = findSqrtValue(j);
+										cout<< "squareroot(" << j << ")" << " = " << out2 << endl;
+									    }
+									
+								
+									  k++;
+									}
 								}
 
 								else
@@ -608,21 +753,21 @@ void readDataFromFile(const char *x)
 			
 
 						else
-							cout << "No operation needed" << endl << endl;
+						  cout << "No operation needed" << endl;
 
 
-					}
+				}
 	
 
-					//If code is natural log
-					else if(MasterCode == 'L' || MasterCode == 'l')
-					{
+				//If code is natural log
+				else if(MasterCode == 'L' || MasterCode == 'l')
+				{
 
 							//what we need
 							file>> a >> b >> c;
 				
 							//Collects first, last, and delta values
-							cout << "Please enter first, last, and delta values, respectively: " <<  a << ' ' << b << ' ' << c;
+							cout << "Please enter code parameters: " <<  a << ' ' << b << ' ' << c << endl;
 							
 				
 			
@@ -633,27 +778,49 @@ void readDataFromFile(const char *x)
 							{
 								//For loop to do operation
 	      
-								int i = a;	      
-								int j = b;
-								int k = 0;
+								double i = a;	      
+								double j = b;
+								double m = c;
+							
+								double k = 0;
 
 								//Designates a counter
-								int c = 1;
+								int d = 1;
 
-								for(i; i <= j;c++)
+								for(i; i <= j;d++)
 								{
 
 									//Makes it so loop will not iterate more than ENTIRES
-									if(c <= ENTRIES)
+									if(d <= ENTRIES)
 									{
 
-										out2 = naturalLog(a + (c * k));
-										cout<< "Natural log is: " << out2 << endl;
-							
 										
+										
+									       
+										if(i == j)
+										{
+										  out2 =  naturalLog(j);
+										  cout<< "ln(" << j << ")" << " = " << out2 << endl;
 
-										i++;
-										k++;
+										  break;
+										}
+										else
+										{
+
+										  out2 = naturalLog(a + (c * k));
+										
+										  cout<< "ln(" << i << ")" << " = " << out2 << endl;
+							
+										  i = i + m;
+										  if(i > j)
+										    {
+										        out2 =  naturalLog(j);
+											cout<< "ln(" << j << ")" << " = " << out2 << endl;
+										    }
+										
+										
+										  k++;
+										}
 
 									}
 
@@ -664,18 +831,18 @@ void readDataFromFile(const char *x)
 								}
 							}
 							else
-								cout << "No operation needed" << endl << endl;
-					}
+							  cout << "No operation needed" << endl;
+				}
 
-					//If code is nyancat
-					else if(MasterCode == 'N' || MasterCode == 'n')
-					{
+				//If code is nyancat
+				else if(MasterCode == 'N' || MasterCode == 'n')
+				{
 
 							//what we need
 							file >> a >> b >> c;
 				
 							//Collects first, last, and delta values
-							cout << "Please enter first, last, and delta values, respectively: " << a << ' ' << b << ' ' << c;
+							cout << "Please enter code parameters: " << a << ' ' << b << ' ' << c << endl;
 						
 
 
@@ -684,26 +851,54 @@ void readDataFromFile(const char *x)
 							{
 								//For loop to do operation
 	      
-								int i = a;	      
-								int j = b;
-								int k = 0;
+								double i = a;	      
+								double j = b;
+								double m = c;
+							
+								double k = 0;
+
 
 								//Designates a counter
-								int c = 1;
+								int d = 1;
 
-								for(i; i <= j;c++)
+								for(i; i <= j;d++)
 								{
 		  
 									//Sets up for loop to never run more than ENTRIES
-									if(c <= ENTRIES)
+									if(d <= ENTRIES)
 									{
 
-										out2 = findNyanCatValue(a + (c * k));
-										cout<< "Nyancat value is: " << out2 << endl;
-										
+									  // cout << (a + (c * k)) << endl << endl;
 
-										i++;
-										k++;
+										
+										
+										
+										if(i == j)
+										{
+										    out2 = findNyanCatValue(j);
+										    cout<< "Nyan Cat value of(" << j << ")" << " = " << out2 << endl;
+										    
+										    break;
+
+										}
+										else
+										{
+										  out2 = findNyanCatValue(a + (c * k));
+										
+										  cout<< "Nyan Cat value of(" << i << ")" << " = " << out2 << endl;
+										
+										  
+										  i = i + m;
+
+										  if(i > j)
+										    {
+										      out2 = findNyanCatValue(j);
+										      cout << "Nyan Cat Value of (" << j << ")" << " = " << out2 << endl;
+										    }
+
+						
+										  k++;
+										}
 									}
 
 									else
@@ -716,31 +911,36 @@ void readDataFromFile(const char *x)
 					
 	  
 							else
-								cout << "No operation needed" << endl << endl;
-					}	
+							  cout << "No operation needed" << endl;
+				}	
 
-					else if(MasterCode == 'Q' || MasterCode == 'q')
-					{
-						break;
+					
 
-					}
-					break;
+		}
 
-				}
-
-				break;
-					//Calls back master function to keep looping
-					cout << endl;
 					
  
 			
-			}
-			file.close();
+			
 
-		}
+			
+ 
+				
+			
 	}
+	
+	else
+	  {
+		cout << "Cannot open file" << endl;
+			
+	  }		
+		file.close();
 
+		
+		
+		
 }
+	
 
 
 
@@ -783,7 +983,7 @@ int fibonacci(int x)
 {
   //Defines variables to be used
   int c;
-  int fT = 0;
+  int fT = 1;
   int sT = 1;
   int next;
 

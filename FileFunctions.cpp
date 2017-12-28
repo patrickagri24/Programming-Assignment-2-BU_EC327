@@ -1,7 +1,10 @@
+
 #include <iostream>
 #include "FileFunctions.h"
 #include <time.h>
+#include <stdlib.h>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -18,13 +21,15 @@ void WriteRandomData(int N, int M, const char * filename)
   for(int i = 0; i < N; i++)
     {
 
-      int out = rand() % M + 0;
+      int out = rand() % (M + 1);
 
       file << out << "\r\n";
 
     }
 
   file.close();
+
+  return;
 
 }
 
@@ -56,11 +61,11 @@ void ReadData(const char *filename, int &size, int myArray[])
 	else
 		cout << "Unable to open file" << endl;
 	
-	
+
 	
 	//gives my array a size
-	myArray[size];
-	
+	// 	myArray[size];
+	//	myArray = new int[size];
 	
 	
 	
@@ -68,11 +73,20 @@ void ReadData(const char *filename, int &size, int myArray[])
 	
 	if(file.is_open())
 	{
+	  
 		for(int i = 0; i <= size; i++)
 		{
 			file >> myArray[i];
 			
 		}
+	  
+	  /*
+	  int i = 0;
+	  while(getline(file,line))
+	    {
+	      myArray[i++] = atoi(line.c_str());
+	    }
+	  */  
 		
 		file.close();
 		
@@ -82,6 +96,6 @@ void ReadData(const char *filename, int &size, int myArray[])
 		cout << "Could not open file" << endl;
 	
 	
-	
+	return;
 
 }
